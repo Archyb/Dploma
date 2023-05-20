@@ -2,9 +2,9 @@
 
 # dependencies
 /node_modules
-/script_deploy/node_modules
-/script_deploy/artifacts
-/script_deploy/cache
+/smartContract/node_modules
+/smartContract/artifacts
+/smartContract/cache
 /.pnp
 .pnp.js
 
