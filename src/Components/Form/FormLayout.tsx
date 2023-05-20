@@ -12,7 +12,10 @@ interface props {
 const formLayout = (props: props) => {
     const {children, title, description, backgroundColor} = props
     return (
-        <Container fixed={true}>
+        <Container sx={{
+            maxWidth:'100%',
+            display:"block",
+        }}>
             <Typography variant={"h2"} align={"left"}>{title}</Typography>
             <Typography align={"left"}>{description}</Typography>
             {children}

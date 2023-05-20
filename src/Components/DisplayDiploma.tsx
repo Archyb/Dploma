@@ -11,7 +11,10 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
     const t:number=(diplomas?.certTemplate?.tempDate!)
     const timestamp = new Date(t*1000).toDateString()
     return (
-        <Box sx={{mt: 2}}>
+        <Box sx={{
+            mt: 2,
+            maxWidth:'100%',
+            display:"block",}}>
             {diplomas! ? (
                 <Paper  sx={{p:10,borderRadius:3,m:2,mt:4}}>
                     <Grid container={true} spacing={2}>
