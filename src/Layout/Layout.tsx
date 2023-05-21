@@ -7,7 +7,6 @@ import {useWeb3} from "../hooks/Hooks";
 import {BrowserRouter} from "react-router-dom";
 
 
-
 interface props {
     theme: Theme;
     darkTheme: Theme;
@@ -30,21 +29,21 @@ const Layout = (props: props) => {
     return (
         <BrowserRouter>
             <ThemeProvider theme={toogleTheme ? theme : darkTheme}>
-                <AppBar style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}} position="sticky">
-                    <Typography variant={"h2"} align={"left"} style={{ paddingLeft: "20px" }}>Dploma</Typography>
-                    <Typography align={"right"} style={{ padding: "20px" }}><Switch checked={toogleTheme} onChange={handleChange}
-                                                                                    inputProps={{'aria-label': 'controlled'}}
-                                                                                    color="warning"/>Theme</Typography>
+                <AppBar style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}
+                        position="sticky">
+                    <Typography variant={"h2"} align={"left"} style={{paddingLeft: "20px"}}>Dploma</Typography>
+                    <Typography align={"right"} style={{padding: "20px"}}><Switch checked={toogleTheme}
+                                                                                  onChange={handleChange}
+                                                                                  inputProps={{'aria-label': 'controlled'}}
+                                                                                  color="warning"/>Theme</Typography>
                 </AppBar>
                 <CssBaseline/>
                 <TabsLayout/>
-
-
-                {!isMobile?(connected?<Typography sx={{p:1}}>You are connected with the account {account} </Typography>:<Typography>You are not connected to metamask</Typography>):<></>}
+                {!isMobile ? (connected ?
+                    <Typography sx={{p: 1}}>You are connected with the account {account} </Typography> :
+                    <Typography>You are not connected to metamask</Typography>) : <></>}
                 <Footer/>
             </ThemeProvider>
-
-
         </BrowserRouter>
     )
 }

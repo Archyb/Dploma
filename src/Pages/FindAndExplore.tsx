@@ -19,7 +19,6 @@ const FindAndExplore = (props: any) => {
     const isMobile = window.innerWidth <= 500;
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-
         setHash({id: event.target.value})
     }
 
@@ -56,7 +55,8 @@ const FindAndExplore = (props: any) => {
     }, [dplomas, handleChange])
     return (
         <FormLayout title={"Finder"} description={"Insert the address you're looking for"}>
-            <Box flexDirection="column" alignItems="center" maxWidth={1000} mx="auto" my={4} p={3} borderRadius={8} boxShadow={3}>
+            <Box flexDirection="column" alignItems="center" maxWidth={1000} mx="auto" my={4} p={3} borderRadius={8}
+                 boxShadow={3}>
                 <Input fullWidth={true} onChange={event => handleChange(event)} aria-label={"input"}
                        placeholder="Enter your hash here..." style={{marginBottom: "20px"}}/>
                 <Button onClick={handleClick} fullWidth={true} variant={"contained"} color="primary"

@@ -69,9 +69,9 @@ const Modification = () => {
         }
     }
     return (<Container>
-            <Box>
-                <Input fullWidth={true} onChange={event => setDplomaHash({id: event.target.value})}
-                       aria-label={"test"}></Input>
+            <Box flexDirection="column" alignItems="center" maxWidth={1000} mx="auto" my={4} p={3} borderRadius={8}
+                 boxShadow={3}>
+                <Input fullWidth={true} onChange={event => setDplomaHash({id: event.target.value})} aria-label={"test"} placeholder="Enter your hash..." style={{ marginBottom: "20px" }} />
                 <Button onClick={handleClick} fullWidth={true} variant={"contained"}>Find</Button>
             </Box>
 
