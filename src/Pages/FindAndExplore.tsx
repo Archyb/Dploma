@@ -8,7 +8,6 @@ import FormLayout from "../Components/Form/FormLayout";
 import {useLocation} from "react-router-dom";
 import QRcode from "../Components/QRcode";
 
-
 const FindAndExplore = (props: any) => {
     const [dplomas, setDplomas] = useState<IDploma | undefined>();
     const [hash, setHash] = useState<any>({id: ""})
@@ -18,6 +17,7 @@ const FindAndExplore = (props: any) => {
     const id = queryParams.get('id');
     const [displayQR, setDisplayQR] = useState<boolean>(false);
     const isMobile = window.innerWidth <= 500;
+
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 
         setHash({id: event.target.value})
@@ -41,6 +41,7 @@ const FindAndExplore = (props: any) => {
     const isEmpty = (obj: any) => {
         return hash.id === "0x";
     }
+
     useEffect(() => {
         if (isEmpty(hash)) {
             setDplomas(undefined)
@@ -48,31 +49,27 @@ const FindAndExplore = (props: any) => {
         } else if (dplomas) {
             setDisplayQR(true)
         }
-        if(id){
+        if (id) {
             setHash({id: id})
             setDisplayQR(true)
         }
-
-    }, [ dplomas,handleChange])
+    }, [dplomas, handleChange])
     return (
-        <FormLayout title={"find"} description={"search for a diploma"}>
-            <Box>
-                <Input fullWidth={true} onChange={event => handleChange(event)} aria-label={"test"}></Input>
-                <Button onClick={handleClick} fullWidth={true} variant={"contained"}>Find</Button>
+        <FormLayout title={"Finder"} description={"Insert the address you're looking for"}>
+            <Box flexDirection="column" alignItems="center" maxWidth={1000} mx="auto" my={4} p={3} borderRadius={8} boxShadow={3}>
+                <Input fullWidth={true} onChange={event => handleChange(event)} aria-label={"input"}
+                       placeholder="Enter your hash here..." style={{marginBottom: "20px"}}/>
+                <Button onClick={handleClick} fullWidth={true} variant={"contained"} color="primary"
+                        style={{marginBottom: "20px"}}>Find</Button>
                 <DisplayDiploma diplomas={dplomas}/>
-
-
             </Box>
-            {!isMobile?<Grid spacing={0}
-                   container
-                   direction="column"
+            {!isMobile ? <Grid spacing={0}
+                               container
+                               direction="column"
             >
                 <div style={{}}> {displayQR ? <QRcode hash={hash.id}/> : <></>}</div>
-
-            </Grid>:<> </>}
+            </Grid> : <> </>}
         </FormLayout>
-
     )
-
 }
 export default FindAndExplore;
