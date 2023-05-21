@@ -17,7 +17,7 @@ const FindAndExplore = (props: any) => {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get('id');
     const [displayQR, setDisplayQR] = useState<boolean>(false);
-
+    const isMobile = window.innerWidth <= 500;
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 
         setHash({id: event.target.value})
@@ -63,13 +63,13 @@ const FindAndExplore = (props: any) => {
 
 
             </Box>
-            <Grid spacing={0}
-                  container
-                  direction="column"
+            {!isMobile?<Grid spacing={0}
+                   container
+                   direction="column"
             >
                 <div style={{}}> {displayQR ? <QRcode hash={hash.id}/> : <></>}</div>
 
-            </Grid>
+            </Grid>:<> </>}
         </FormLayout>
 
     )

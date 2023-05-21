@@ -18,7 +18,7 @@ const Layout = (props: props) => {
 
     //theming
     const {theme, darkTheme} = props;
-
+    const isMobile = window.innerWidth <= 500;
     const [toogleTheme, setChangeToogleTheme] = useState<boolean>(true)
 
     const handleChange = () => {
@@ -40,7 +40,7 @@ const Layout = (props: props) => {
                 <TabsLayout/>
 
 
-                {connected?<Typography>You are connected with the account {account} </Typography>:<Typography>You are not connected to metamask</Typography>}
+                {!isMobile?(connected?<Typography sx={{p:1}}>You are connected with the account {account} </Typography>:<Typography>You are not connected to metamask</Typography>):<></>}
                 <Footer/>
             </ThemeProvider>
 

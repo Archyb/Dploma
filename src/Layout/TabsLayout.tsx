@@ -47,44 +47,69 @@ function a11yProps(index: number) {
 
 export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
-
+    const isMobile = window.innerWidth <= 500;
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
     const {metamasInstalled} = useWeb3()
+
+    const renderTabs = () => {
+        switch (isMobile) {
+            case true:
+                return (<>  <Box sx={{borderBottom: 2, borderColor: 'divider'}}>
+                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                        <Tab label="Find and Explore" {...a11yProps(0)} />
+                    </Tabs>
+                </Box>
+                    <TabPanel value={value} index={0}>
+                        {/*pernmet de faire la lecture via QR code  de la certification avec l url suivant:
+            exemple  http://localhost:3000/?id=0x9B454B54E056C0BD6B182B70145319402A030FB6E7A1B980D16341F33B473D8C
+            */}
+                        <Container>
+                            <Routes>
+                                <Route path={""} element={<FindAndExplore/>}>
+                                    <Route path={":id"} element={<FindAndExplore/>}/>
+                                </Route>
+                            </Routes>
+                        </Container>
+                    </TabPanel>
+                </>)
+            default:
+                return (<>  <Box sx={{borderBottom: 2, borderColor: 'divider'}}>
+                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                        <Tab label="Find and Explore" {...a11yProps(0)} />
+                        <Tab label="Register" {...a11yProps(1)} />
+                        <Tab label="Modify" {...a11yProps(2)} />
+                    </Tabs>
+                </Box>
+                    <TabPanel value={value} index={0}>
+                        {/*pernmet de faire la lecture via QR code  de la certification avec l url suivant:
+            exemple  http://localhost:3000/?id=0x9B454B54E056C0BD6B182B70145319402A030FB6E7A1B980D16341F33B473D8C
+            */}
+                        <Container>
+                            <Routes>
+                                <Route path={""} element={<FindAndExplore/>}>
+                                    <Route path={":id"} element={<FindAndExplore/>}/>
+                                </Route>
+                            </Routes>
+                        </Container>
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        <Container>
+                            {metamasInstalled ? <Register/> : <InstallMetamask/>}
+                        </Container>
+                    </TabPanel>
+                    <TabPanel value={value} index={2}>
+                        <Container>
+                            {metamasInstalled ? <Modification/> : <InstallMetamask/>}
+                        </Container>
+                    </TabPanel></>)
+        }
+    }
     return (
 
         <Box sx={{width: '100%'}}>
-            <Box sx={{borderBottom: 2, borderColor: 'divider'}}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Find and Explore" {...a11yProps(0)} />
-                    <Tab label="Register" {...a11yProps(1)} />
-                    <Tab label="Modify" {...a11yProps(2)} />
-                </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-                {/*pernmet de faire la lecture via QR code  de la certification avec l url suivant:
-            exemple  http://localhost:3000/?id=0x9B454B54E056C0BD6B182B70145319402A030FB6E7A1B980D16341F33B473D8C
-            */}
-                <Container>
-                    <Routes>
-                        <Route path={""} element={<FindAndExplore/>}>
-                            <Route path={":id"} element={<FindAndExplore/>}/>
-                        </Route>
-                    </Routes>
-                </Container>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Container>
-                    {metamasInstalled ? <Register/> : <InstallMetamask/>}
-                </Container>
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <Container>
-                    {metamasInstalled ? <Modification/> : <InstallMetamask/>}
-                </Container>
-            </TabPanel>
-
+            {renderTabs()}
         </Box>
     );
 }
