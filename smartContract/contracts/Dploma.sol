@@ -120,7 +120,7 @@ contract Dploma {
     Certified private unknownCertified = Certified("hidden", "hidden", "hidden");
 
     function toggleStudentVisibility(bytes32 _hashCert) public {
-        require(mapCert[_hashCert].certAddrCertifier == msg.sender);
+        require(mapCert[_hashCert].certAddrCertified == msg.sender);
         studentVisibility[_hashCert] = !studentVisibility[_hashCert];
         emit evtCertifiedVisibility("Certified public visibility has changed");
     }
