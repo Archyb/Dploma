@@ -22,7 +22,7 @@ To ensure ease of access and readability, the project incorporates a QR code sys
 - Solidity: A smart contract programming language for Ethereum.
 - Ethereum: A decentralized, blockchain-based platform.
 - Hardhat: A development environment for compiling, deploying, and testing smart contracts.
-- QR Code Library: A library for generating and scanning QR codes.
+- QR Code Library: A library for generating and scanning QR codes. https://www.npmjs.com/package/qrcode.react
 
 ## Getting Started
 
