@@ -55,6 +55,7 @@ Open a terminal from the project root and enter the following command
 ```
 cd smartContract/hardhat.config.ts
 
+```
 
 
 
