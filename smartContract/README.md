@@ -1,4 +1,4 @@
-## Dploma Smart contract
+# Dploma Smart contract
 
 The following is a Solidity smart contract named "Dploma" that is designed to handle certifications and templates for a certification system. The contract allows the creation of certifications and templates, as well as the modification and deletion of certifications. It also incorporates specific characteristics regarding write permissions.
 
