@@ -182,7 +182,7 @@ src
    |-- Type
    |   |-- type.ts
    |-- hooks
-   |   |-- Hooks.ts                                  ->define accounts specs and connexion status for metamask
+   |   |-- Hooks.ts                                  -> define accounts specs and connexion status for metamask
    |   |-- useSmc.ts                                 -> facilitate the reading of the certification
    |-- index.css
    |-- index.tsx
