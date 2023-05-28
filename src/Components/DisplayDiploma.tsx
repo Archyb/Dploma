@@ -42,7 +42,7 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
                                         <Typography align={"left"} color={"dark"}><strong>First name
                                             :</strong> {diplomas?.certCertified?.cfiedFirstname}
                                         </Typography>
-                                        <Typography align={"left"} color={"dark"}><strong>First name
+                                        <Typography align={"left"} color={"dark"}><strong>Last name
                                             :</strong> {diplomas?.certCertified?.cfiedLastname}
                                         </Typography>
                                         <Typography align={"left"}><strong>Birthdate
@@ -103,7 +103,7 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
                                         <Typography align={"left"} color={"dark"}><strong>First name
                                             :</strong> {diplomas?.certCertified?.cfiedFirstname}
                                         </Typography>
-                                        <Typography align={"left"} color={"dark"}><strong>First name
+                                        <Typography align={"left"} color={"dark"}><strong>Last name
                                             :</strong> {diplomas?.certCertified?.cfiedLastname}
                                         </Typography>
                                         <Typography align={"left"}><strong>Birthdate
