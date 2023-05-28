@@ -26,6 +26,13 @@ To ensure ease of access and readability, the project incorporates a QR code sys
 
 ## Getting Started
 
+## Prerequisites
+
+Before running this project, make sure you have the following:
+
+1. Metamask Wallet: Install the Metamask extension in your browser and create an Ethereum wallet. This will be used to interact with the blockchain and deploy the smart contract.
+
+2. Alchemy Account: Sign up for an account on Alchemy (https://alchemy.com/) and create a new application. This will provide you with an Alchemy API URL and a private key.
 
 
 ### 1. Général
@@ -77,9 +84,20 @@ npx hardhat compile
 
 ````
 
+- Deploy the smart contract
 
+````
+npx hardhat run --network <your-network> scripts/deploy.js
+
+```
+
+Once deployement is finished please copy/paste the smartcontract adress provided in the log to .env file 
+
+Please notice that if any changes have been made to the original smart contract, you will have copy/past the content "artifacts/contracts/Dploma.sol/Dploma.json to ../src/ABI/ABI.json
 
 ### Front end
+
+
 
 
 ## Project Achitecture
