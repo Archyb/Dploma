@@ -61,7 +61,6 @@ Open a terminal from the project root and enter the following command
 
 ```
 cd smartContract
-
 ```
 
 - Modify the hardhat.config.ts to define on wich Ethereum networks you want to deploy your smart contract 
@@ -74,21 +73,18 @@ Learn more about the configuration here : https://hardhat.org/hardhat-runner/doc
  
  ````
  npm i
- 
  ````
 
 - Compile the smart contract: 
 
 ````
 npx hardhat compile
-
 ````
 
 - Deploy the smart contract
 
 ````
 npx hardhat run --network <your-network> scripts/deploy.js
-
 ````
 
 Once deployement is finished please copy/paste the smartcontract adress provided in the log to .env file 
@@ -100,7 +96,6 @@ Please notice that if any changes have been made to the original smart contract,
 
 ```
 npm start
-
 ```
 
 ##### - Build and export the project
@@ -108,7 +103,6 @@ npm start
 
 ```
 npm run build
-
 ```
 
 To export the user interface on a server please copy/paste build folder content on your server
