@@ -1,123 +1,278 @@
-import {time, loadFixture} from "@nomicfoundation/hardhat-network-helpers";
-import {anyValue} from "@nomicfoundation/hardhat-chai-matchers/withArgs";
-import {expect} from "chai";
-import {ethers} from "hardhat";
+import {IDploma, ITemplate, ICertified, ICertifier} from "../../src/Type/type"
 
+const {expect} = require("chai");
+const {ethers} = require("hardhat");
+import {config as dotEnvConfig} from "dotenv";
+import {BigNumber} from "ethers";
+
+dotEnvConfig({path: "../.env"});
 describe("Dploma", function () {
-    // We define a fixture to reuse the same setup in every test.
-    // We use loadFixture to run this setup once, snapshot that state,
-    // and reset Hardhat Network to that snapshot in every test.
-
-    it("Should evaluate the data integrity while fetching a certification", async function () {
-        const [signer] = await ethers.getSigners();
-        const Dploma = await ethers.getContractFactory("Dploma");
-        const dploma = await Dploma.deploy();
+    let Dploma;
+    let dploma;
+    let addrCertified: { address: any; } = {address: process.env.METAMASK_ACCOUNT};
+    let addrCertifier: { address: any; } = {address: process.env.METAMASK_ACCOUNT};
+    this.timeout(100000);
+    beforeEach(async function () {
+        Dploma = await ethers.getContractFactory("Dploma");
+        dploma = await Dploma.deploy();
         await dploma.deployed();
-
-        // redifining the object
-        const data = {
-            addcertfied: "0x0000000000000000000000000000000000000000",
-            addcertfier: "0x00000000",
-            certified: {},
-            certifier: {},
-            template: {
-                temp_title: '',
-                temp_name: '',
-                temp_date: '',
-                temp_spec: []
-            }
-        }
-
-        const certification = await dploma.getCertification("0xBD5BB9BC75B79A19D99106DBF88F3F2ECE22D3FC164E4A67C94FB6F6BA4D88A1")
-        const addcertfier = (certification[0])
-        const addcertfied = (certification[1])
-        const certified = (certification[2])
-        const certifier = (certification[3])
-        const template = (certification[4].splice(3))
-        console.log(template)
-        expect(template).to.equal(data.template)
-
-    });
-
-    it("Should check the modification functionality", async function () {
-        const [signer] = await ethers.getSigners();
-        const Dploma = await ethers.getContractFactory("Dploma");
-        const dploma = await Dploma.deploy();
-        await dploma.deployed();
-
-        //modifed object
-        const data = {
-            addcertfied: "0x0000000000000000000000000000000000000000",
-            addcertfier: "0x00000000",
-            certified: {},
-            certifier: {},
-            template: {
-                temp_title: 'New title',
-                temp_name: 'New name',
-                temp_date: 'New date',
-                temp_spec: []
-
-            }
-        }
-
-        const certification = await dploma.modifyTemplate("0xBD5BB9BC75B79A19D99106DBF88F3F2ECE22D3FC164E4A67C94FB6F6BA4D88A1", data.template.temp_title, data.template.temp_name, data.template.temp_date, data.template.temp_spec)
-        const template = (certification[4].splice(3))
-        expect(template).to.equal(data.template)
-        //
-
-    });
-    it("Should check the deletion of a certification", async function () {
-        const [signer] = await ethers.getSigners();
-        const Dploma = await ethers.getContractFactory("Dploma");
-        const dploma = await Dploma.deploy();
-        await dploma.deployed();
-
-        //modifed object
-        const data = {
-            addcertfied: "0x0000000000000000000000000000000000000000",
-            addcertfier: "0x0000000000000000000000000000000000000000",
-            certified: {},
-            certifier: {},
-            template: {},
-        }
-
-        await dploma.connect(data.addcertfier).deleteCertifiication("0xBD5BB9BC75B79A19D99106DBF88F3F2ECE22D3FC164E4A67C94FB6F6BA4D88A1")
-        const certificationPostDeletion = await dploma.getCertification("0xBD5BB9BC75B79A19D99106DBF88F3F2ECE22D3FC164E4A67C94FB6F6BA4D88A1")
-        const template = (certificationPostDeletion[4].splice(3))
-        expect(template).to.equal(data.template)
     });
 
 
-    it("Should check the modification of the visibility of a certified actor", async function () {
-        const [signer] = await ethers.getSigners();
-        const Dploma = await ethers.getContractFactory("Dploma");
-        const dploma = await Dploma.deploy();
-        await dploma.deployed();
+    it("should create a template", async function () {
+        const tempTitle = "Template Title";
+        const tempName = "Template Name";
+        const tempDate = 1622179200; // Unix timestamp for June 28, 2021
+        const tempSpecs = ["Spec 1", "Spec 2"];
 
-        //modifed object
-        const data = {
-            addcertfied: "0x0000000000000000000000000000000000000000",
-            addcertfier: "0x00000000",
-            certified: {
-                cfiedFirstname: 'hidden',
-                cfiedLastname: 'hidden',
-                cfiedBirthdate: 'hidden',
-            },
-            certifier: {},
-            template: {
-                temp_title: '',
-                temp_name: '',
-                temp_date: '',
-                temp_spec: []
+        const tx = await dploma.createTemplate(tempTitle, tempName, tempDate, tempSpecs);
+        const receipt = await tx.wait();
 
-            }
-        }
+        const event = receipt.events.find((event) => event.event === "evtTemplate");
+        const hashTemplate = event.args[1];
 
-        //TODO add parameters with
-        const certification = await dploma.connect(data.addcertfied).toggleStudentVisibility()
-        const certificationPostDeletion = await dploma.toogleStudentVisbility("0xBD5BB9BC75B79A19D99106DBF88F3F2ECE22D3FC164E4A67C94FB6F6BA4D88A1")
-        const certified= (certificationPostDeletion[2])
-        expect(certified).to.equal(data.certified)
-
+        expect(hashTemplate).to.exist;
     });
-});
+
+    it("should insert certification with existing template", async function () {
+        const cfiedFirstname = "John";
+        const cfiedLastname = "Doe";
+        const cfiedBirthdate = "1990-01-01";
+        const cfierName = "Certifier Name";
+        const cfierAdress = "Certifier Address";
+
+        const tempTitle = "Template Title";
+        const tempName = "Template Name";
+        const tempDate = 1622179200; // Unix timestamp for June 28, 2021
+        const tempSpecs = ["Spec 1", "Spec 2"];
+
+        const tx = await dploma.createTemplate(tempTitle, tempName, tempDate, tempSpecs);
+        const receipt = await tx.wait();
+
+        const event = receipt.events.find((event) => event.event === "evtTemplate");
+        const hashTemplate = event.args[1];
+
+        const txInsert = await dploma.insertWithTemplate(
+            cfiedFirstname,
+            cfiedLastname,
+            cfiedBirthdate,
+            cfierName,
+            cfierAdress,
+            hashTemplate,
+            addrCertified.address
+        );
+        const insertReceipt = await txInsert.wait();
+
+        const insertEvent = insertReceipt.events.find((event) => event.event === "evtCertifCreation");
+        const hashCert = insertEvent.args[1];
+
+        const certification: IDploma = await dploma.getCertification(hashCert);
+        expect(certification).to.exist;
+
+        expect(certification.certAddrCertifier).to.equal(addrCertifier.address);
+        expect(certification.certAddrCertified).to.equal(addrCertified.address);
+        expect(certification.certCertified?.cfiedFirstname).to.equal(cfiedFirstname);
+        expect(certification.certCertified?.cfiedLastname).to.equal(cfiedLastname);
+        expect(certification.certCertified?.cfiedBirthdate).to.equal(cfiedBirthdate);
+        expect(certification.certCertifier?.cfierName).to.equal(cfierName);
+        expect(certification.certCertifier?.cfierPhysicalAddress).to.equal(cfierAdress);
+        expect(certification.certTemplate?.tempTitle).to.equal(tempTitle);
+        expect(certification.certTemplate?.tempName).to.equal(tempName);
+        expect(certification.certTemplate?.tempSpecs).to.deep.equal(tempSpecs);
+    });
+    it("should insert certification without template", async function () {
+        const cfiedFirstname = "John";
+        const cfiedLastname = "Doe";
+        const cfiedBirthdate = "1990-01-01";
+        const cfierName = "Certifier Name";
+        const cfierPhysicalAddress = "Certifier Physical Address";
+
+        const tempTitle = "Custom Template Title";
+        const tempName = "Custom Template Name";
+        const tempDate = 1654003200; // Unix timestamp for June 1, 2022
+        const tempSpecs = ["Custom Spec 1", "Custom Spec 2"];
+
+        const txInsert = await dploma.insertWithoutTemplate(
+            cfiedFirstname,
+            cfiedLastname,
+            cfiedBirthdate,
+            cfierName,
+            cfierPhysicalAddress,
+            addrCertified.address,
+            tempTitle,
+            tempName,
+            tempDate,
+            tempSpecs
+        );
+        const insertReceipt = await txInsert.wait();
+
+        const insertEvent = insertReceipt.events.find((event) => event.event === "evtCertifCreation");
+        const hashCert = insertEvent.args[1];
+
+        const certification: IDploma = await dploma.getCertification(hashCert);
+
+        expect(certification.certAddrCertifier).to.equal(addrCertifier.address);
+        expect(certification.certAddrCertified).to.equal(addrCertified.address);
+        expect(certification.certCertified?.cfiedFirstname).to.equal(cfiedFirstname);
+        expect(certification.certCertified?.cfiedLastname).to.equal(cfiedLastname);
+        expect(certification.certCertified?.cfiedBirthdate).to.equal(cfiedBirthdate);
+        expect(certification.certCertifier?.cfierName).to.equal(cfierName);
+        expect(certification.certCertifier?.cfierPhysicalAddress).to.equal(cfierPhysicalAddress);
+        expect(certification.certTemplate?.tempTitle).to.equal(tempTitle);
+        expect(certification.certTemplate?.tempName).to.equal(tempName);
+        ;
+        expect(certification.certTemplate?.tempSpecs).to.deep.equal(tempSpecs);
+    });
+
+    it("should toggle student visibility", async function () {
+        const cfiedFirstname = "John";
+        const cfiedLastname = "Doe";
+        const cfiedBirthdate = "1990-01-01";
+        const cfierName = "Certifier Name";
+        const cfierAdress = "Certifier Address";
+
+        const tempTitle = "Template Title";
+        const tempName = "Template Name";
+        const tempDate = 1622179200; // Unix timestamp for June 28, 2021
+        const tempSpecs = ["Spec 1", "Spec 2"];
+
+        const tx = await dploma.createTemplate(tempTitle, tempName, tempDate, tempSpecs);
+        const receipt = await tx.wait();
+
+        const event = receipt.events.find((event) => event.event === "evtTemplate");
+        const hashTemplate = event.args[1];
+
+        const txInsert = await dploma.insertWithTemplate(
+            cfiedFirstname,
+            cfiedLastname,
+            cfiedBirthdate,
+            cfierName,
+            cfierAdress,
+            hashTemplate,
+            addrCertified.address
+        );
+        const insertReceipt = await txInsert.wait();
+
+        const insertEvent = insertReceipt.events.find((event) => event.event === "evtCertifCreation");
+        const hashCert = insertEvent.args[1];
+
+        // Check initial visibility
+        let certification = await dploma.getCertification(hashCert);
+        expect(certification.certCertified.cfiedFirstname).to.equal(cfiedFirstname);
+
+        // Toggle visibility
+        const txToggle = await dploma.toggleStudentVisibility(hashCert);
+        const toggleReceipt = await txToggle.wait();
+
+        const toggleEvent = toggleReceipt.events.find((event) => event.event === "evtCertifiedVisibility");
+        expect(toggleEvent).to.not.be.undefined;
+
+        // Check updated visibility
+        certification = await dploma.getCertification(hashCert);
+        expect(certification.certCertified.cfiedFirstname).to.equal("hidden");
+        expect(certification.certCertified.cfiedLastname).to.equal("hidden");
+        expect(certification.certCertified.cfiedBirthdate).to.equal("hidden");
+
+        // Toggle visibility again
+        const txToggleAgain = await dploma.toggleStudentVisibility(hashCert);
+        const toggleAgainReceipt = await txToggleAgain.wait();
+
+        // Check final visibility
+        certification = await dploma.getCertification(hashCert);
+        expect(certification.certCertified.cfiedFirstname).to.equal(cfiedFirstname);
+        expect(certification.certCertified.cfiedLastname).to.equal(cfiedLastname);
+        expect(certification.certCertified.cfiedBirthdate).to.equal(cfiedBirthdate);
+    });
+
+    it("should modify template", async function () {
+        const cfiedFirstname = "John";
+        const cfiedLastname = "Doe";
+        const cfiedBirthdate = "1990-01-01";
+        const cfierName = "Certifier Name";
+        const cfierAdress = "Certifier Address";
+
+        const tempTitle = "Template Title";
+        const tempName = "Template Name";
+        const tempDate = 1622179200; // Unix timestamp for June 28, 2021
+        const tempSpecs = ["Spec 1", "Spec 2"];
+
+        const tx = await dploma.createTemplate(tempTitle, tempName, tempDate, tempSpecs);
+        const receipt = await tx.wait();
+
+        const event = receipt.events.find((event) => event.event === "evtTemplate");
+        const hashTemplate = event.args[1];
+
+        const txInsert = await dploma.insertWithTemplate(
+            cfiedFirstname,
+            cfiedLastname,
+            cfiedBirthdate,
+            cfierName,
+            cfierAdress,
+            hashTemplate,
+            addrCertified.address
+        );
+        const insertReceipt = await txInsert.wait();
+
+        const insertEvent = insertReceipt.events.find((event) => event.event === "evtCertifCreation");
+        const hashCert = insertEvent.args[1];
+
+        // Modify template
+        const newTitle = "New Template Title";
+        const newName = "New Template Name";
+        const newDate = 1654003200; // Unix timestamp for June 1, 2022
+        const newSpecs = ["New Spec 1", "New Spec 2"];
+
+        const txModify = await dploma.modifyTemplate(hashCert, newTitle, newName, newDate, newSpecs);
+        const modifyReceipt = await txModify.wait();
+
+        const modifyEvent = modifyReceipt.events.find((event) => event.event === "evtModificationMsg");
+        expect(modifyEvent).to.not.be.undefined;
+
+        // Check modified template
+        const certification = await dploma.getCertification(hashCert);
+        expect(certification.certTemplate.tempTitle).to.equal(newTitle);
+        expect(certification.certTemplate.tempName).to.equal(newName);
+        expect(certification.certTemplate.tempSpecs).to.deep.equal(newSpecs);
+    });
+    it("should delete certification", async function () {
+        const cfiedFirstname = "John";
+        const cfiedLastname = "Doe";
+        const cfiedBirthdate = "1990-01-01";
+        const cfierName = "Certifier Name";
+        const cfierAdress = "Certifier Address";
+
+        const tempTitle = "Template Title";
+        const tempName = "Template Name";
+        const tempDate = 1622179200; // Unix timestamp for June 28, 2021
+        const tempSpecs = ["Spec 1", "Spec 2"];
+
+        const tx = await dploma.createTemplate(tempTitle, tempName, tempDate, tempSpecs);
+        const receipt = await tx.wait();
+
+        const event = receipt.events.find((event) => event.event === "evtTemplate");
+        const hashTemplate = event.args[1];
+
+        const txInsert = await dploma.insertWithTemplate(
+            cfiedFirstname,
+            cfiedLastname,
+            cfiedBirthdate,
+            cfierName,
+            cfierAdress,
+            hashTemplate,
+            addrCertified.address
+        );
+        const insertReceipt = await txInsert.wait();
+
+        const insertEvent = insertReceipt.events.find((event) => event.event === "evtCertifCreation");
+        const hashCert = insertEvent.args[1];
+
+        // Delete certification
+        const txDelete = await dploma.deleteCertif(hashCert);
+        const deleteReceipt = await txDelete.wait();
+
+        // Check if certification is deleted
+        const certification = await dploma.getCertification(hashCert);
+        !expect(certification.certAddrCertifier).to.exist;
+    });
+
+})
