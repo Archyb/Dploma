@@ -36,8 +36,8 @@ To get started with this project, follow the steps below:
 3. Set up the environment variables by creating a `.env` file in the project root directory and filling it with the following variables:
 
 ```
-REACT_APP_CONTRACT_ADDRESS=0x763C7f6565A64E3257e221FdcB5ca8A2386F5EEC
-REACT_APP_DOMAIN=https://dploma.nogadev.ch
+REACT_APP_CONTRACT_ADDRESS=smartcontract adress provided by hardhat logs once the smart contract is deployed
+REACT_APP_DOMAIN=the domain to access the online website in order to use the QRCode
 REACT_APP_ALCHEMY_URL=URL provided by your Alchemy application
 PRIVATE_KEY="your Metamask private key"
 API_URL="URL provided by your Alchemy application"
@@ -48,6 +48,13 @@ METAMASK_ACCOUNT="your Metamask public key used for the test"
 ### 2. Smart contract
 
 #### Hardhat configuation
+
+. Access the configuration file : 
+Open a terminal from the project root and enter the following command
+
+```
+cd smartContract/hardhat.config.ts
+
 
 
 
