@@ -43,6 +43,7 @@ To get started with this project, follow the steps below:
 3. Set up the environment variables by creating a `.env` file in the project root directory and filling it with the following variables:
 
 ```
+
 REACT_APP_CONTRACT_ADDRESS=smartcontract adress provided by hardhat logs once the smart contract is deployed
 REACT_APP_DOMAIN=the domain to access the online website in order to use the QRCode
 REACT_APP_ALCHEMY_URL=URL provided by your Alchemy application
