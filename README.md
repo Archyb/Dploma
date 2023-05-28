@@ -89,7 +89,7 @@ npx hardhat compile
 ````
 npx hardhat run --network <your-network> scripts/deploy.js
 
-```
+````
 
 Once deployement is finished please copy/paste the smartcontract adress provided in the log to .env file 
 
