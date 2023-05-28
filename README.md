@@ -49,13 +49,33 @@ METAMASK_ACCOUNT="your Metamask public key used for the test"
 
 #### Hardhat configuation
 
-. Access the configuration file : 
+- Access the configuration file : 
 Open a terminal from the project root and enter the following command
 
 ```
-cd smartContract/hardhat.config.ts
+cd smartContract
 
 ```
+
+- Modify the hardhat.config.ts to define on wich Ethereum networks you want to deploy your smart contract 
+Learn more about the configuration here : https://hardhat.org/hardhat-runner/docs/config
+
+### Smart contract
+
+
+- Install all depenencies:
+ 
+ ````
+ npm i
+ 
+ ````
+
+- Compile the smart contract: 
+
+````
+npx hardhat compile
+
+````
 
 
 
