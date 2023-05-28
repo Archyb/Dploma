@@ -4,22 +4,22 @@ The following is a Solidity smart contract named "Dploma" that is designed to ha
 
 The contract defines several structs:
 
-- **Certification**: Represents a certification and contains the following information:
+1. **Certification**: Represents a certification and contains the following information:
     - certAddrCertifier (address): Address of the certifier (issuer) of the certification.
     - certAddrCertified (address): Address of the certified individual.
     - certCertified (Certified): Struct containing details of the certified individual, including their first name, last name, and birthdate.
     - certCertifier (Certifier): Struct containing details of the certifier, including their name and physical address.
     - certTemplate (Template): Struct representing the template associated with the certification.
 
-- **Template**: Represents a certification template and contains the following information:
+2. **Template**: Represents a certification template and contains the following information:
     - tempTitle (string): Title of the template.
     - tempName (string): Name of the template.
     - tempDate (uint256): Date of the template in Unix timestamp format.
     - tempSpecs (string[]): Array of strings representing additional specifications of the template.
 
-- **Certified**: Contains details of a certified individual, including their first name, last name, and birthdate.
+3. **Certified**: Contains details of a certified individual, including their first name, last name, and birthdate.
 
-- **Certifier**: Contains details of a certifier, including their name and physical address.
+4. **Certifier**: Contains details of a certifier, including their name and physical address.
 
 The contract also defines several private mappings and variables:
 
