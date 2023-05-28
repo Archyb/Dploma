@@ -35,7 +35,7 @@ Before running this project, make sure you have the following:
 2. Alchemy Account: Sign up for an account on Alchemy (https://alchemy.com/) and create a new application. This will provide you with an Alchemy API URL and a private key.
 
 
-### 1. Général
+### 1. General
 To get started with this project, follow the steps below:
 
 1. Clone the repository: `git clone [repository-url]`
