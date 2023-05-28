@@ -3,7 +3,7 @@
 The following is a Solidity smart contract named "Dploma" that is designed to handle certifications and templates for a certification system. The contract allows the creation of certifications and templates, as well as the modification and deletion of certifications. It also incorporates specific characteristics regarding write permissions.
 
 
-## Structure
+## Structures
 
 The contract defines several structs:
 
@@ -23,7 +23,7 @@ The contract defines several structs:
 3. **Certified**: Contains details of a certified individual, including their first name, last name, and birthdate.
 
 4. **Certifier**: Contains details of a certifier, including their name and physical address.
-## Mapping
+## Mappings
 The contract also defines several private mappings and variables:
 
 - **mapCert:** Mapping that stores certifications using a unique identifier (bytes32) as the key. Only the certifier has write access to this mapping.
