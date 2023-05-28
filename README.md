@@ -177,7 +177,7 @@ src
    |   |-- Modification.tsx
    |   |-- Register.tsx
    |-- Services
-   |   |-- SecurityHelper.ts                          -> check USER right and Key
+   |   |-- SecurityHelper.ts                          -> check USER right and certification Key
    |   |-- Web3APi.ts                                 -> Define all methods to interact with the smart contract
    |-- Type
    |   |-- type.ts
