@@ -115,7 +115,100 @@ To export the user interface on a server please copy/paste build folder content 
 
 ## Project Achitecture
 
+````
+.env
+.gitignore
+.idea
+   |-- .gitignore
+   |-- dbnavigator.xml
+   |-- dploma_ts.iml
+   |-- inspectionProfiles
+   |   |-- Project_Default.xml
+   |-- modules.xml
+   |-- vcs.xml
+README.md
+package-lock.json
+package.json
+public
+   |-- favicon.ico
+   |-- index.html
+   |-- logo192.png
+   |-- logo512.png
+   |-- manifest.json
+   |-- robots.txt
+sequence.md
+smartContract
+   |-- .gitignore
+   |-- .idea
+   |   |-- .gitignore
+   |   |-- dbnavigator.xml
+   |   |-- modules.xml
+   |   |-- script_deploy.iml
+   |   |-- vcs.xml
+   |-- README.md
+   |-- contracts
+   |   |-- Dploma.sol
+   |-- hardhat.config.ts
+   |-- package-lock.json
+   |-- package.json
+   |-- scripts
+   |   |-- deploy.ts
+   |-- test
+   |   |-- Dploma.ts
+   |-- tsconfig.json
+src
+   |-- ABI
+   |   |-- ABI.json
+   |-- App.css
+   |-- App.test.tsx
+   |-- App.tsx
+   |-- Components
+   |   |-- ButtonModal.tsx
+   |   |-- DisplayDiploma.tsx
+   |   |-- Footer.tsx
+   |   |-- Form
+   |   |   |-- FormInsertWithTemplate.tsx
+   |   |   |-- FormInsertWithoutTemplate.tsx
+   |   |   |-- FormLayout.tsx
+   |   |   |-- FormTemplate.tsx
+   |   |   |-- FormVisbility.tsx
+   |   |   |-- FromModalInsertWithTemplate.tsx
+   |   |-- LinearBuffer.tsx
+   |   |-- Modal
+   |   |   |-- FormModalDelete.tsx
+   |   |   |-- FormModalInsertWithouTemplate.tsx
+   |   |   |-- FormModalModification.tsx
+   |   |   |-- FormModalTemplate.tsx
+   |   |-- QRcode.tsx
+   |   |-- Tablink.tsx
+   |-- Layout
+   |   |-- Layout.tsx
+   |   |-- TabsLayout.tsx
+   |-- Pages
+   |   |-- AuthentifiedModification.tsx
+   |   |-- FindAndExplore.tsx
+   |   |-- InstallMetamask.tsx
+   |   |-- Modification.tsx
+   |   |-- Register.tsx
+   |-- Services
+   |   |-- SecurityHelper.ts
+   |   |-- Web3APi.ts
+   |-- Type
+   |   |-- type.ts
+   |-- hooks
+   |   |-- Hooks.ts
+   |   |-- useSmc.ts
+   |-- index.css
+   |-- index.tsx
+   |-- logo.svg
+   |-- react-app-env.d.ts
+   |-- reportWebVitals.ts
+   |-- setupTests.ts
+tsconfig.json
 
+````
+npm run build
+npm run build
 
 ## Configuration
 
