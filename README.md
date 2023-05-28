@@ -118,14 +118,6 @@ To export the user interface on a server please copy/paste build folder content 
 ````
 .env
 .gitignore
-.idea
-   |-- .gitignore
-   |-- dbnavigator.xml
-   |-- dploma_ts.iml
-   |-- inspectionProfiles
-   |   |-- Project_Default.xml
-   |-- modules.xml
-   |-- vcs.xml
 README.md
 package-lock.json
 package.json
