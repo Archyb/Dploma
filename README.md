@@ -92,13 +92,13 @@ Once deployement is finished please copy/paste the smartcontract adress provided
 Please notice that if any changes have been made to the original smart contract, you will have copy/past the content "artifacts/contracts/Dploma.sol/Dploma.json to ../src/ABI/ABI.json
 
 ### Front end
-##### - localhost
+- localhost
 
 ```
 npm start
 ```
 
-##### - Build and export the project
+- Build and export the project
 
 
 ```
