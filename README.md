@@ -161,7 +161,7 @@ src
    |   |-- ABI.json
    |-- App.css
    |-- App.test.tsx
-   |-- App.tsx
+   |-- App.tsx                                          -> Modify the theming here in the material ui configuration
    |-- Components
    |   |-- ButtonModal.tsx
    |   |-- DisplayDiploma.tsx
@@ -182,7 +182,7 @@ src
    |   |-- QRcode.tsx
    |   |-- Tablink.tsx
    |-- Layout
-   |   |-- Layout.tsx
+   |   |-- Layout.tsx                                 -> define the routing to direct access specifique Tab of the app: end point: yourDomainName/?id=hashCertification
    |   |-- TabsLayout.tsx
    |-- Pages
    |   |-- AuthentifiedModification.tsx
@@ -191,13 +191,13 @@ src
    |   |-- Modification.tsx
    |   |-- Register.tsx
    |-- Services
-   |   |-- SecurityHelper.ts
-   |   |-- Web3APi.ts
+   |   |-- SecurityHelper.ts                          -> check USER right and Key
+   |   |-- Web3APi.ts                                 -> Define all methods to interact with the smart contract
    |-- Type
    |   |-- type.ts
    |-- hooks
-   |   |-- Hooks.ts
-   |   |-- useSmc.ts
+   |   |-- Hooks.ts                                  ->define accounts specs and connexion status for metamask
+   |   |-- useSmc.ts                                 -> facilitate the reading of the certification
    |-- index.css
    |-- index.tsx
    |-- logo.svg
