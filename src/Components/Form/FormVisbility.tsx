@@ -61,11 +61,11 @@ const FormVisbility = (props: Iprops) => {
 
                 </Paper></div>;
             case ERROR:
-                return <div>Error</div>;
+                return <Typography>Error</Typography>;
             default:
-                return <div>Please notice that this action will hide the personal information of the user concerned by
+                return <Typography variant='h5'>Please notice that this action will hide the personal information of the user concerned by
                     this
-                    certification</div>;
+                    certification</Typography>;
         }
     }
     return (
