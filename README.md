@@ -207,13 +207,11 @@ src
 tsconfig.json
 
 ````
-npm run build
-npm run build
 
-## Configuration
+## Test
 
+In order to test the smart contract please make the following step:
 
+- ``` cd smartcContract ```
+- ``` npx hardhat test ```
 
-## Commands:
-
-### Smart contract
