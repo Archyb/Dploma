@@ -22,7 +22,7 @@ The contract defines several structs:
 
 3. **Certified**: Contains details of a certified individual, including their first name, last name, and birthdate.
 
-4. **Certifier**: Contains details of a certifier, including their name and physical address.
+4. '**Certifier**': Contains details of a certifier, including their name and physical address.
 ## Mappings
 The contract also defines several private mappings and variables:
 
