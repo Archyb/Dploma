@@ -36,16 +36,16 @@ The contract also defines several private mappings and variables:
 ## Functions
 The contract provides the following functions:
 
-- **createTemplate(_tempTitle: string, _tempName: string, _tempDate: uint256, _tempSpecs: string[]): bytes32**
+- `createTemplate(_tempTitle: string, _tempName: string, _tempDate: uint256, _tempSpecs: string[]): bytes32`
     - Allows the creation of a new template by providing the template's title, name, date, and specifications.
     - Returns a unique identifier (bytes32) for the template.
  
-- **insertWithTemplate(_cfiedFirstname: string, _cfiedLastname: string, _cfiedBirthdate: string, _cfierName: string, _cfierAdress: string, _hashTemplate: bytes32, _certifiedPubAddress: address): bytes32`**
+- `insertWithTemplate(_cfiedFirstname: string, _cfiedLastname: string, _cfiedBirthdate: string, _cfierName: string, _cfierAdress: string, _hashTemplate: bytes32, _certifiedPubAddress: address): bytes32`
     - Creates a certification using an existing template.
     - Requires providing the certified individual's details, certifier's details, the template identifier, and the certified individual's public address.
     - Returns a unique identifier (bytes32) for the certification.
 
-- **insertWithoutTemplate(_cfiedFirstname: string, _cfiedLastname: string, _cfiedBirthdate: string, _cfierName: string, _cfierPhysicalAddress: string, _certifiedPubAddress: address, _tempTitle: string, _tempName: string, _tempDate: uint256, _tempSpecs: string[]): bytes32**
+- `insertWithoutTemplate(_cfiedFirstname: string, _cfiedLastname: string, _cfiedBirthdate: string, _cfierName: string, _cfierPhysicalAddress: string, _certifiedPubAddress: address, _tempTitle: string, _tempName: string, _tempDate: uint256, _tempSpecs: string[]): bytes32`
     - Creates a certification with a new template.
     - Requires providing the certified individual's details, certifier's details, certified individual's public address, and the details of the new template.
     - Returns a unique identifier (bytes32) for the certification.
