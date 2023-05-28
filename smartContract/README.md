@@ -55,7 +55,7 @@ The contract provides the following functions:
     - Requires providing the certification identifier (_hashCert).
     - Only the certified associated with the certification can invoke this function and modify the `studentVisibility` mapping.
 
-- `getCertification(_hashCert: bytes32): Certification**
+- `getCertification(_hashCert: bytes32): Certification`
     - Retrieves the details of a certification using its unique identifier (_hashCert).
     - If the certified individual has chosen not to be publicly visible, their details are replaced with placeholder values.
     - Anyone can invoke this function to access certification details.
