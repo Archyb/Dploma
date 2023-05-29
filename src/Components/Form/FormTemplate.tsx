@@ -37,7 +37,7 @@ const FormTemplate = (props: props) => {
 
         const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
             const {name, value} = event.target;
-            if (name === "tempSpec") {
+            if (name === "tempSpecs") {
                 const values = value.split(",");
                 setFormValues(prevValues => ({...prevValues, [name]: values}));
             } else {
@@ -49,7 +49,8 @@ const FormTemplate = (props: props) => {
         };
 
         const handleDateChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-            const date = new Date(event.target.value).getDate();
+            const date = new Date(event.target.value).getTime()
+            console.log(date)
             setFormValues(prevValues => ({...prevValues,tempDate: date}));
 
         };
@@ -126,7 +127,7 @@ const FormTemplate = (props: props) => {
                             />
                             <TextField
                                 required={true}
-                                name="tempSpec"
+                                name="tempSpecs"
                                 placeholder="Specs separated by comma ','"
                                 type="text"
                                 size="small"

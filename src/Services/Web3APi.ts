@@ -68,7 +68,7 @@ export const updateTemplate = async (hashTemplate: string,
                                      spec: string[]) => {
     const sender = await provider.eth.getAccounts()
     console.log(hashTemplate, title, name, date, spec)
-    const diploma = await dploma.methods.ModifyTemplate(
+    const diploma = await dploma.methods.modifyTemplate(
         hashTemplate,
         title,
         name,
@@ -79,7 +79,7 @@ export const updateTemplate = async (hashTemplate: string,
 
 export const deleteCertif = async (id: string) => {
     const sender = await provider.eth.getAccounts()
-    return await dploma.methods.DeleteCertif(id).send({from: sender[0]});
+    return await dploma.methods.deleteCertif(id).send({from: sender[0]});
 }
 
 export const changeVisibility = async (id: string) => {

@@ -67,7 +67,7 @@ export const useSmc = (props: { id: string } | undefined) => {
             setCertification(await fetchWeb3(id))
         }
         fetchDploma()
-    }, [])
+    }, [id])
 
 
     return {

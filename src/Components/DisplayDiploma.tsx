@@ -10,7 +10,7 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
     const isMobile = window.innerWidth <= 500;
     const {diplomas} = props
     const t: number = (diplomas?.certTemplate?.tempDate!)
-    const timestamp = new Date(t * 1000).toDateString()
+    const timestamp = new Date(t /1).toDateString()
 
     const render = () => {
         switch (isMobile) {

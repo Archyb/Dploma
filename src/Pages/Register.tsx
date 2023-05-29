@@ -19,7 +19,7 @@ const Register = () => {
         if (!connected) {
             setClicked(false)
         }
-    }, [connected])
+    }, [connected,connect])
 
     return (<Container fixed={true}>
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useSmc} from "../hooks/useSmc";
 import {Button, Grid, Input} from "@mui/material";
 import {IDploma} from "../Type/type";
@@ -37,9 +37,9 @@ const FindAndExplore = (props: any) => {
             })
         }
     }, [])
-    const isEmpty = (obj: any) => {
+    const isEmpty = useCallback((obj: any) => {
         return hash.id === "0x";
-    }
+    }, [hash])
 
     useEffect(() => {
         if (isEmpty(hash)) {
@@ -52,7 +52,7 @@ const FindAndExplore = (props: any) => {
             setHash({id: id})
             setDisplayQR(true)
         }
-    }, [dplomas, handleChange])
+    }, [dplomas, handleChange,id,isEmpty,hash])
     return (
         <FormLayout title={"Finder"} description={"Insert the address you're looking for"}>
             <Box flexDirection="column" alignItems="center" maxWidth={1000} mx="auto" my={4} p={3} borderRadius={8}
