@@ -67,7 +67,6 @@ export const updateTemplate = async (hashTemplate: string,
                                      date: number,
                                      spec: string[]) => {
     const sender = await provider.eth.getAccounts()
-    console.log(hashTemplate, title, name, date, spec)
     const diploma = await dploma.methods.modifyTemplate(
         hashTemplate,
         title,

@@ -50,7 +50,6 @@ const FormTemplate = (props: props) => {
 
         const handleDateChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
             const date = new Date(event.target.value).getTime()
-            console.log(date)
             setFormValues(prevValues => ({...prevValues,tempDate: date}));
 
         };

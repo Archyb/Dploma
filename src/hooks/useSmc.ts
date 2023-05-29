@@ -12,7 +12,6 @@ import {IDploma, ITemplate} from "../Type/type";
 const fetchWeb3 = async (id?: string | undefined) => {
     return id! ? await getDploma(id).then((res: IDploma) => {
         const certif: IDploma = res
-        console.log(certif)
         return certif
     }) : undefined
 }
