@@ -54,11 +54,11 @@ const FormModalDelete = (props: Iprops) => {
                     <LinearBuffer/>
                 </div>;
             case SUCCESS:
-                return <div><Paper variant={"outlined"}><Typography variant={"h5"}>Visbility
+                return <div><Typography variant={"h5"}>Visbility
                     status</Typography><Typography
                     noWrap={true}>{response}</Typography>
 
-                </Paper></div>
+               </div>
             case ERROR:
                 return <div><Paper variant={"outlined"}><Typography variant={"h5"}>Visbility
                     status</Typography><Typography
