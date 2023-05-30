@@ -55,7 +55,6 @@ const FormWithoutTemplate = (props: props) => {
         };
 
         const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-            console.log(event.target.value)
             const tempDate = Math.round(new Date(event.target.value).getTime())
             setFormValues(prevValues => ({...prevValues, tempDate}));
         };
@@ -68,7 +67,6 @@ const FormWithoutTemplate = (props: props) => {
         const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setRequestStatus(LOADING)
-            console.log(formValues)
             createWithoutTemplate(formValues.certifiedFirstName,
                 formValues.certifiedLastName,
                 formValues.certifiedBirthDate,
@@ -79,7 +77,6 @@ const FormWithoutTemplate = (props: props) => {
                 formValues.templateName,
                 formValues.tempDate,
                 formValues.otherValues).then((res) => {
-                    console.log(res)
                     setRequestStatus(SUCCESS);
                     setResponse(res.events.evtCertifCreation.returnValues[1])
                 }

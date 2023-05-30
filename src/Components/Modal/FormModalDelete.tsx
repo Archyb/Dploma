@@ -38,11 +38,11 @@ const FormModalDelete = (props: Iprops) => {
     const handleDelete = () => {
         setRequestStatus(LOADING);
         deleteCertification(props.hash).then((res) => {
-            console.log(res)
+
             setResponse(res.events.evtDeletedCertif.returnValues[0])
             setRequestStatus(SUCCESS);
         }).catch((err) => {
-            console.log(err)
+
             setRequestStatus(ERROR);
         })
     }

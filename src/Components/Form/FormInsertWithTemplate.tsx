@@ -59,7 +59,6 @@ const FormInsertWithTemplate = (props: props) => {
             formValues.certifierAdress,
             formValues.hashTemplate,
             formValues.certifiedPublicAdress).then((res) => {
-                console.log(res)
                 setRequestStatus(SUCCESS);
                 setResponse(res.events.evtCertifCreation.returnValues[1])
             }

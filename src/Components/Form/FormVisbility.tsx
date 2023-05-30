@@ -45,7 +45,6 @@ const FormVisbility = (props: Iprops) => {
             setResponse(res.events.evtCertifiedVisibility.returnValues[0])
             setRequestStatus(SUCCESS);
         }).catch((err) => {
-            console.log(err)
             setRequestStatus(ERROR);
         })
     }
