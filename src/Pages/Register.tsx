@@ -11,7 +11,7 @@ const Register = () => {
     const [open, setOpen] = useState(false);
     const [openwithTemplate, setOpenWithTemplate] = useState(false);
     const [openWithouTemplate, setOpenWithoutTemplate] = useState(false);
-    const {connected, connect} = useWeb3()
+    const {connected, connect,account} = useWeb3()
     const [clicked, setClicked] = useState(false)
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Register = () => {
         if (!connected) {
             setClicked(false)
         }
-    }, [connected,connect])
+    }, [connected,account,connect])
 
     return (<Container fixed={true}>
 

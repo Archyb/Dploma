@@ -48,6 +48,9 @@ const FindAndExplore = (props: any) => {
         } else if (dplomas) {
             setDisplayQR(true)
         }
+        if (dplomas?.certAddrCertifier === "0x0000000000000000000000000000000000000000") {
+            setDisplayQR(false)
+        }
         if (id) {
             setHash({id: id})
             setDisplayQR(true)

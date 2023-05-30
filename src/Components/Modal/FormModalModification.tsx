@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {Dialog, DialogActions, DialogContent, Divider, Paper,} from "@mui/material";
+import {Dialog, DialogActions, DialogContent, Divider, IconButton, Paper,} from "@mui/material";
 import {Dispatch, SetStateAction, useState} from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,6 +11,8 @@ import FormTemplate from "../Form/FormTemplate";
 import {ITemplate, RequestQueryStatus} from "../../Type/type";
 import LinearBuffer from "../LinearBuffer";
 import {updateTemp} from "../../hooks/useSmc";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import QRcode from "../QRcode";
 
 
 interface Iprops {
@@ -50,6 +52,9 @@ const FormModalModification = (props: Iprops) => {
             setRequestStatus(ERROR);
         })
     }
+    const handleCopy = () => {
+        navigator.clipboard.writeText(props.hash)
+    }
     const renderContent = () => {
         switch (requestStatus) {
             case LOADING:
@@ -60,7 +65,13 @@ const FormModalModification = (props: Iprops) => {
                 return <div><Typography variant={"h5"}>Modify content
                     status</Typography><Typography
                     noWrap={true}>{response}</Typography>
-
+                    <Divider sx={{p:2}} variant={"middle"}/>
+                    <Typography variant={"h5"} sx={{pt:1}}>Hash Template</Typography><Typography
+                        noWrap={true}>{props.hash}</Typography>
+                    <IconButton>
+                        <ContentCopyIcon color="secondary" onClick={handleCopy}/>
+                    </IconButton>
+                    <QRcode hash={props.hash}/>
                 </div>
             case ERROR:
                 return <div><Paper variant={"outlined"}><Typography variant={"h5"}>Modify content
@@ -112,8 +123,8 @@ const FormModalModification = (props: Iprops) => {
                     {renderContent()}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleModify}>Modify</Button>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    {requestStatus===NONE? <Button onClick={handleModify}>Modify</Button>:<></>}
+                    <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         </div>)

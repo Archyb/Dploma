@@ -7,10 +7,11 @@ import {useWeb3} from "../hooks/Hooks";
 import InstallMetamask from "../Pages/InstallMetamask";
 import Register from "../Pages/Register";
 import Modification from "../Pages/Modification";
-import {Outlet} from "react-router";
+
 import {Route, Routes} from "react-router-dom";
 import FindAndExplore from "../Pages/FindAndExplore";
 import {Container} from "@mui/material";
+
 
 interface TabPanelProps {
     children?: React.ReactNode;

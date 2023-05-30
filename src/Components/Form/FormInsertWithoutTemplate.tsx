@@ -56,7 +56,7 @@ const FormWithoutTemplate = (props: props) => {
 
         const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             console.log(event.target.value)
-            const tempDate = Math.round(new Date(event.target.value).getTime() / 1000)
+            const tempDate = Math.round(new Date(event.target.value).getTime())
             setFormValues(prevValues => ({...prevValues, tempDate}));
         };
 

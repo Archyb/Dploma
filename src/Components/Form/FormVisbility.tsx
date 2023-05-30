@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {Dialog, DialogActions, DialogContent, Divider, Paper,} from "@mui/material";
+import {Dialog, DialogActions, DialogContent, Divider, IconButton, Paper,} from "@mui/material";
 import {Dispatch, SetStateAction, useState} from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,6 +11,7 @@ import {RequestQueryStatus} from "../../Type/type";
 import LinearBuffer from "../LinearBuffer";
 import QRcode from "../QRcode";
 import {toggleVisibility} from "../../hooks/useSmc";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 
 interface Iprops {
@@ -41,11 +42,15 @@ const FormVisbility = (props: Iprops) => {
         e.preventDefault()
         setRequestStatus(LOADING);
         toggleVisibility(props.hash).then((res) => {
-            setResponse(res.events.evtCertifiedVisisbility.returnValues[0])
+            setResponse(res.events.evtCertifiedVisibility.returnValues[0])
             setRequestStatus(SUCCESS);
         }).catch((err) => {
+            console.log(err)
             setRequestStatus(ERROR);
         })
+    }
+    const handleCopy = () => {
+        navigator.clipboard.writeText(props.hash)
     }
     const renderContent = () => {
         switch (requestStatus) {
@@ -54,12 +59,18 @@ const FormVisbility = (props: Iprops) => {
                     <LinearBuffer/>
                 </div>;
             case SUCCESS:
-                return <div><Paper variant={"outlined"}><Typography variant={"h5"}>Visbility
+                return <div><Typography variant={"h5"}>Visbility
                     status</Typography><Typography
                     noWrap={true}>{response}</Typography>
-                    <QRcode hash={response}/>
+                    <Divider sx={{p:1}} variant={"middle"}/>
+                    <Typography variant={"h5"} sx={{pt:1}}>Hash Template</Typography><Typography
+                        noWrap={true}>{props.hash}</Typography>
+                    <IconButton>
+                        <ContentCopyIcon color="secondary" onClick={handleCopy}/>
+                    </IconButton>
+                    <QRcode hash={props.hash}/>
 
-                </Paper></div>;
+               </div>;
             case ERROR:
                 return <Typography>Error</Typography>;
             default:
@@ -97,7 +108,7 @@ const FormVisbility = (props: Iprops) => {
                 </DialogContent></div>
 
                 <DialogActions>
-                    <Button onClick={(e) => handleCertifiedVisibility(e)}>Confirm</Button>
+                    {requestStatus===NONE? <Button onClick={(e) => handleCertifiedVisibility(e)}>Confirm</Button>:<></>}
                     <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>

@@ -1,6 +1,7 @@
 import {IDploma} from "../Type/type";
 import Box from "@mui/material/Box";
 import {Divider, Grid, Paper, Typography} from "@mui/material";
+import {useEffect, useState} from "react";
 
 interface DisplayDiplomaProps {
     diplomas?: IDploma
@@ -10,13 +11,21 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
     const isMobile = window.innerWidth <= 500;
     const {diplomas} = props
     const t: number = (diplomas?.certTemplate?.tempDate!)
-    const timestamp = new Date(t /1).toDateString()
+    const timestamp = new Date(t / 1).toDateString()
+    const [isDiploma, setIsDiploma] = useState<boolean>(false)
+    useEffect(() => {
+        if(diplomas){setIsDiploma(true)}
+        if (diplomas?.certAddrCertifier === "0x0000000000000000000000000000000000000000") {
+            setIsDiploma(false)
+        }
+
+    }, [diplomas])
 
     const render = () => {
         switch (isMobile) {
             case true:
-                return ( diplomas! ? (
-                        <Paper sx={{p: 1,pb:20, borderRadius: 3, m: 2, mt: 4}}>
+                return (isDiploma ? (
+                        <Paper sx={{p: 1, pb: 20, borderRadius: 3, m: 2, mt: 4}}>
                             <Grid container={true} spacing={3}>
                                 <Grid item={true} xs={12} md={6}>
 
@@ -76,7 +85,7 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
                     )
                     : "No diplomas found")
             default:
-                return ( diplomas! ? (
+                return (isDiploma ? (
                         <Paper sx={{p: 10, borderRadius: 3, m: 2, mt: 4}}>
                             <Grid container={true} spacing={2}>
                                 <Grid item={true} xs={12} md={6}>
@@ -120,17 +129,16 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
                                     </Typography>
                                     <Typography align={"left"}><strong>Date :</strong> {timestamp}
                                     </Typography>
-                                    <div>
+                                    <div style={{paddingBottom: "3rem"}}>
                                         <Typography align={"left"}><strong>Speciality
                                             :</strong></Typography>
-
-
-                                        <Paper>
-                                        <ul style={{position: "absolute"}}>
-                                            {diplomas?.certTemplate?.tempSpecs?.map((speciality, index) => {
-                                                    return <Typography key={index}>{speciality}</Typography>
-                                                }
-                                            )}</ul></Paper>
+                                        <div>
+                                            <ul style={{position: "absolute"}}>
+                                                {diplomas?.certTemplate?.tempSpecs?.map((speciality, index) => {
+                                                        return <Typography key={index}>{speciality}</Typography>
+                                                    }
+                                                )}</ul>
+                                        </div>
                                     </div>
                                 </Grid>
                             </Grid>
@@ -141,9 +149,7 @@ const DisplayDiploma = (props: DisplayDiplomaProps) => {
     }
 
     return (
-        <Box sx={{
-
-        }}>
+        <Box sx={{}}>
             {render()}
 
         </Box>

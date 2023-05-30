@@ -163,7 +163,7 @@
                 "type": "string"
               }
             ],
-            "internalType": "struct Diploma.Certified",
+            "internalType": "struct Dploma.Certified",
             "name": "certCertified",
             "type": "tuple"
           },
@@ -180,7 +180,7 @@
                 "type": "string"
               }
             ],
-            "internalType": "struct Diploma.Certifier",
+            "internalType": "struct Dploma.Certifier",
             "name": "certCertifier",
             "type": "tuple"
           },
@@ -207,12 +207,12 @@
                 "type": "string[]"
               }
             ],
-            "internalType": "struct Diploma.Template",
+            "internalType": "struct Dploma.Template",
             "name": "certTemplate",
             "type": "tuple"
           }
         ],
-        "internalType": "struct Diploma.Certification",
+        "internalType": "struct Dploma.Certification",
         "name": "",
         "type": "tuple"
       }

@@ -27,7 +27,7 @@ const FormModalDelete = (props: Iprops) => {
     const {NONE, LOADING, SUCCESS, ERROR} = RequestQueryStatus
     const [requestStatus, setRequestStatus] = useState<RequestQueryStatus>(NONE);
     const [response, setResponse] = useState<string>("")
-    const { open = false, setOpen, title, action, disabled} = props;
+    const {open = false, setOpen, title, action, disabled} = props;
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -41,7 +41,8 @@ const FormModalDelete = (props: Iprops) => {
             console.log(res)
             setResponse(res.events.evtDeletedCertif.returnValues[0])
             setRequestStatus(SUCCESS);
-        }).catch(() => {
+        }).catch((err) => {
+            console.log(err)
             setRequestStatus(ERROR);
         })
     }
@@ -77,7 +78,7 @@ const FormModalDelete = (props: Iprops) => {
         <div>
 
 
-            <Card  sx={{maxWidth: 345}} style={{borderRadius: 20}}>
+            <Card sx={{maxWidth: 345}} style={{borderRadius: 20}}>
 
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -105,8 +106,8 @@ const FormModalDelete = (props: Iprops) => {
                 /> {renderContent()}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleDelete}>Confirm</Button>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    {requestStatus===NONE ? <Button onClick={handleDelete}>Confirm</Button> : <></>}
+                    <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         </div>)
