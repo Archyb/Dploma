@@ -176,5 +176,6 @@ contract Dploma {
     function deleteCertif(bytes32 _hashCert) public {
         require(mapCert[_hashCert].certAddrCertifier == msg.sender);
         delete mapCert[_hashCert];
+        emit evtDeletedCertif("Certification has been deleted");
     }
 }
